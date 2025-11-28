@@ -5,24 +5,19 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: String,
+  info: String,
+  image: String,
+  category_id: {
+    type: String,
+    required: true
+  },
   price: {
     type: Number,
     required: true
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'
-  },
-  image: String,
-  images: [String],
   stock: {
     type: Number,
     default: 0
-  },
-  isActive: {
-    type: Boolean,
-    default: true
   },
   rating: {
     type: Number,

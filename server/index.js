@@ -26,6 +26,24 @@ app.get('/', (req, res) => {
   res.send('Hello from the Gachwala server!');
 });
 
+// Test route to check database
+app.get('/api/test', async (req, res) => {
+  try {
+    const Category = require('./models/Category');
+    const Product = require('./models/Product');
+    const categories = await Category.find();
+    const products = await Product.find();
+    res.json({
+      categoriesCount: categories.length,
+      productsCount: products.length,
+      categories,
+      products
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

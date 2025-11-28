@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Monstera Deliciosa",
+    "info": "Large tropical plant with iconic split leaves. Perfect for bright indirect light. Low maintenance and air-purifying.",
+    "image": "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=500",
+    "category_id": "pure-indoor",
+    "price": 1299,
+    "stock": 15,
+    "rating": 4.5
+  },
+  {
+    "name": "Snake Plant",
+    "info": "Hardy and drought-tolerant plant that thrives in low light. Great for beginners and improves air quality.",
+    "image": "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=500",
+    "category_id": "pure-indoor",
+    "price": 499,
+    "stock": 25,
+    "rating": 4.8
+  },
+  {
+    "name": "Rose Plant",
+    "info": "Beautiful flowering plant with fragrant blooms. Requires full sunlight and regular watering.",
+    "image": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500",
+    "category_id": "outdoor",
+    "price": 799,
+    "stock": 20,
+    "rating": 4.6
+  },
+  {
+    "name": "Bougainvillea",
+    "info": "Vibrant flowering plant that thrives in full sun. Drought-tolerant once established. Multiple color options.",
+    "image": "https://images.unsplash.com/photo-1591958911259-bee2173bdccc?w=500",
+    "category_id": "outdoor",
+    "price": 899,
+    "stock": 12,
+    "rating": 4.7
+  },
+  {
+    "name": "Peace Lily",
+    "info": "Elegant white flowers with glossy leaves. Thrives in medium to low light. Excellent air purifier.",
+    "image": "https://images.unsplash.com/photo-1593691509543-02cc7a469c7d?w=500",
+    "category_id": "semi-outdoor",
+    "price": 649,
+    "stock": 18,
+    "rating": 4.4
+  },
+  {
+    "name": "Pothos Golden",
+    "info": "Easy-to-grow trailing plant with heart-shaped leaves. Adaptable to various light conditions.",
+    "image": "https://images.unsplash.com/photo-1614594895304-fe7116ac3b3b?w=500",
+    "category_id": "semi-outdoor",
+    "price": 349,
+    "stock": 30,
+    "rating": 4.9
+  },
+  {
+    "name": "Tomato Seeds - Hybrid",
+    "info": "High-yield tomato seeds perfect for home gardens. Disease-resistant variety with large fruits.",
+    "image": "https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=500",
+    "category_id": "seeds",
+    "price": 99,
+    "stock": 100,
+    "rating": 4.3
+  },
+  {
+    "name": "Marigold Seeds Mix",
+    "info": "Colorful annual flower seeds. Easy to grow and attract pollinators. Blooms all summer.",
+    "image": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=500",
+    "category_id": "seeds",
+    "price": 79,
+    "stock": 150,
+    "rating": 4.6
+  },
+  {
+    "name": "Organic Potting Mix - 5kg",
+    "info": "Premium quality potting soil with peat moss, perlite, and compost. Ideal for all indoor plants.",
+    "image": "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?w=500",
+    "category_id": "soil-fertilizers",
+    "price": 299,
+    "stock": 40,
+    "rating": 4.7
+  },
+  {
+    "name": "NPK Fertilizer 19:19:19",
+    "info": "Balanced all-purpose fertilizer for healthy plant growth. Water-soluble formula. 500g pack.",
+    "image": "https://images.unsplash.com/photo-1615671524827-c1fe3973b648?w=500",
+    "category_id": "soil-fertilizers",
+    "price": 249,
+    "stock": 50,
+    "rating": 4.5
+  },
+  {
+    "name": "Garden Tool Set - 5 Pieces",
+    "info": "Complete gardening toolkit with spade, fork, trowel, pruner, and cultivator. Durable steel construction.",
+    "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=500",
+    "category_id": "gardening-accessories",
+    "price": 1499,
+    "stock": 15,
+    "rating": 4.8
+  },
+  {
+    "name": "Watering Can - 5L",
+    "info": "Sturdy plastic watering can with long spout. Perfect for indoor and outdoor plants. Ergonomic design.",
+    "image": "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=500",
+    "category_id": "gardening-accessories",
+    "price": 399,
+    "stock": 35,
+    "rating": 4.4
+  }
+]

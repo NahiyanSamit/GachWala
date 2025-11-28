@@ -1,0 +1,26 @@
+[
+  {
+    "category_id": "outdoor",
+    "name": "Outdoor"
+  },
+  {
+    "category_id": "pure-indoor",
+    "name": "Pure Indoor"
+  },
+  {
+    "category_id": "semi-outdoor",
+    "name": "Semi Outdoor"
+  },
+  {
+    "category_id": "seeds",
+    "name": "Seeds"
+  },
+  {
+    "category_id": "soil-fertilizers",
+    "name": "Soil & Fertilizers"
+  },
+  {
+    "category_id": "gardening-accessories",
+    "name": "Gardening Accessories"
+  }
+]

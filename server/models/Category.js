@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
+  category_id: {
+    type: String,
+    required: true,
+    unique: true
+  },
   name: {
     type: String,
     required: true
-  },
-  description: String,
-  image: String,
-  slug: String,
-  isActive: {
-    type: Boolean,
-    default: true
   }
 }, {
   timestamps: true
