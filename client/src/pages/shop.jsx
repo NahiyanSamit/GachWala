@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-const Shop = () => {
+const Shop = ({ setCart }) => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -38,6 +38,24 @@ const Shop = () => {
       selectedCategories.includes(product.category_id)
     );
   }, [selectedCategories, products]);
+
+  const addToCart = (product) => {
+    setCart(prev => {
+      const existingItem = prev.find(item => item._id === product._id);
+      if (existingItem) {
+        return prev.map(item =>
+          item._id === product._id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity: 1 }];
+    });
+  };
+
+
+
+
 
   return (
     <div className="min-h-screen w-screen pt-20 pb-24 bg-green-50">
@@ -80,7 +98,10 @@ const Shop = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-yellow-600">⭐ {product.rating}</span>
-                  <button className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                  <button 
+                    onClick={() => addToCart(product)}
+                    className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+                  >
                     Add to Cart
                   </button>
                 </div>
@@ -96,7 +117,7 @@ const Shop = () => {
 
       <Link
         to="/"
-        className="fixed right-4 bottom-20 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg"
+        className="fixed left-4 bottom-20 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg"
       >
         Back to Home
       </Link>
