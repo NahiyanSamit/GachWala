@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
@@ -13,7 +13,7 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [user, setUser] = useState(null);
 
-  const verifyToken = async (token) => {
+  const verifyToken = useCallback(async (token) => {
     try {
       const response = await fetch('http://localhost:5000/api/auth/verify', {
         headers: {
@@ -30,7 +30,7 @@ function App() {
       console.error('Token verification failed:', error);
       localStorage.removeItem('token');
     }
-  };
+  }, []);
 
   const handleLogin = (userData, token) => {
     setUser(userData);
@@ -46,9 +46,12 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      verifyToken(token);
+      // defer the verification to avoid calling setState synchronously inside the effect
+      setTimeout(() => {
+        verifyToken(token);
+      }, 0);
     }
-  }, []);
+  }, [verifyToken]);
 
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -91,6 +94,7 @@ function App() {
             <Shop 
               cart={cart} 
               setCart={setCart}
+              user={user}
             />
           } 
         />

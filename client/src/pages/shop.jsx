@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import ProductModal from '../components/ProductModal';
 
-const Shop = ({ setCart }) => {
+const Shop = ({ setCart, user }) => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Fetch categories
@@ -39,18 +42,28 @@ const Shop = ({ setCart }) => {
     );
   }, [selectedCategories, products]);
 
-  const addToCart = (product) => {
+  const addToCart = (product, quantity = 1) => {
     setCart(prev => {
       const existingItem = prev.find(item => item._id === product._id);
       if (existingItem) {
         return prev.map(item =>
           item._id === product._id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
-      return [...prev, { ...product, quantity: 1 }];
+      return [...prev, { ...product, quantity }];
     });
+  };
+
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const closeProductModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
   };
 
 
@@ -58,7 +71,7 @@ const Shop = ({ setCart }) => {
 
 
   return (
-    <div className="min-h-screen w-screen pt-20 pb-24 bg-green-50">
+    <div className="min-h-screen pt-20 pb-24 bg-green-50">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold mb-4 text-green-900 text-center">Shop Page</h1>
         <p className="text-lg mb-6 text-green-800 text-center">Explore our collection of plants and gardening supplies!</p>
@@ -83,7 +96,11 @@ const Shop = ({ setCart }) => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.map(product => (
-            <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+            <div 
+              key={product._id} 
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+              onClick={() => openProductModal(product)}
+            >
               <img 
                 src={product.image} 
                 alt={product.name}
@@ -99,7 +116,10 @@ const Shop = ({ setCart }) => {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-yellow-600">⭐ {product.rating}</span>
                   <button 
-                    onClick={() => addToCart(product)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addToCart(product);
+                    }}
                     className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg text-sm font-semibold"
                   >
                     Add to Cart
@@ -121,6 +141,15 @@ const Shop = ({ setCart }) => {
       >
         Back to Home
       </Link>
+
+      {/* Product Modal */}
+      <ProductModal
+        product={selectedProduct}
+        isOpen={isModalOpen}
+        onClose={closeProductModal}
+        onAddToCart={addToCart}
+        user={user}
+      />
     </div>
   );
 };
