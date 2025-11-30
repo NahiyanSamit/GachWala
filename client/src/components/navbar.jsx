@@ -11,9 +11,9 @@ const Navbar = ({ cartCount, onCartClick, user, onLogout }) => {
         <div className="flex items-center gap-4">
           {user ? (
             <div className="flex items-center gap-3">
-              <span className="text-gray-700 font-semibold">
+              <Link to='/user' className="text-gray-700 hover:text-green-800 font-semibold">
                 👤 {user.name}
-              </span>
+              </Link>
               <button
                 onClick={onLogout}
                 className="text-gray-700 hover:text-red-600 font-medium"

@@ -14,6 +14,28 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  phone: {
+    type: String,
+    default: ''
+  },
+  address: {
+    street: {
+      type: String,
+      default: ''
+    },
+    city: {
+      type: String,
+      default: ''
+    },
+    state: {
+      type: String,
+      default: ''
+    },
+    zipCode: {
+      type: String,
+      default: ''
+    }
   }
 }, { timestamps: true });
 

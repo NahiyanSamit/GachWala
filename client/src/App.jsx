@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Home from './pages/home';
+import User from './pages/user';
 import Login from './pages/login';
 import Shop from './pages/shop';
 import Cart from './components/Cart';
@@ -84,6 +85,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/user" element={<User user={user} />} />
         <Route 
           path="/shop" 
           element={
