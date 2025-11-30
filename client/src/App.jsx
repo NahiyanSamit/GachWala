@@ -80,12 +80,11 @@ function App() {
         cartCount={getTotalItems()} 
         onCartClick={() => setIsCartOpen(true)}
         user={user}
-        onLogout={handleLogout}
       />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/user" element={<User user={user} />} />
+        <Route path="/user" element={<User user={user} onLogout={handleLogout} />} />
         <Route 
           path="/shop" 
           element={

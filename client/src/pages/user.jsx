@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const User = ({ user }) => {
+const User = ({ user, onLogout }) => {
   const [activeTab, setActiveTab] = useState('profile');
   const [profileData, setProfileData] = useState({
     name: '',
@@ -76,12 +76,15 @@ const User = ({ user }) => {
   };
 
   useEffect(() => {
-    if (!user) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       navigate('/login');
       return;
     }
-    fetchUserProfile();
-    fetchOrders();
+    if (user) {
+      fetchUserProfile();
+      fetchOrders();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, navigate]);
 
@@ -161,7 +164,14 @@ const User = ({ user }) => {
   };
 
   if (!user) {
-    return null;
+    return (
+      <div className="min-h-screen w-screen pt-20 pb-24 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 text-lg">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -174,12 +184,20 @@ const User = ({ user }) => {
               <h1 className="text-3xl font-bold text-green-700">My Profile</h1>
               <p className="text-gray-600">Welcome back, {user.name}!</p>
             </div>
-            <Link
-              to="/"
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition"
-            >
-              🏠 Back to Home
-            </Link>
+            <div className="flex gap-3">
+              <Link
+                to="/"
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition"
+              >
+                🏠 Back to Home
+              </Link>
+              <button
+                onClick={onLogout}
+                className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition"
+              >
+                🚪 Logout
+              </button>
+            </div>
           </div>
           
           {/* Profile Completion Bar */}
