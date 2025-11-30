@@ -1,17 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ cartCount, onCartClick }) => {
+const Navbar = ({ cartCount, onCartClick, user, onLogout }) => {
   return (
-    <nav className="bg-white bg-opacity-70 shadow-md w-full p-3 h-16 z-50" style={{ position: 'fixed', top: 0, left: 0, right: 0 }}>
+    <nav className="bg-slate-400 bg-opacity-70 shadow-md w-full p-3 h-16 z-50" style={{ position: 'fixed', top: 0, left: 0, right: 0 }}>
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-green-800">
           Gachwala
         </Link>
         <div className="flex items-center gap-4">
-          <Link to="/login" className="text-gray-700 hover:text-green-800">
-            Login
-          </Link>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-gray-700 font-semibold">
+                👤 {user.name}
+              </span>
+              <button
+                onClick={onLogout}
+                className="text-gray-700 hover:text-red-600 font-medium"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="text-gray-700 hover:text-green-800">
+              Login
+            </Link>
+          )}
           <button 
             onClick={onCartClick}
             className="text-gray-700 hover:text-green-800 relative flex items-center gap-1"

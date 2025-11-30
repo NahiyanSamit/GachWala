@@ -18,9 +18,11 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 const categoryRoutes = require('./routes/categories');
 const productRoutes = require('./routes/products');
+const authRoutes = require('./routes/auth');
 
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello from the Gachwala server!');

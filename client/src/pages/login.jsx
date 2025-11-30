@@ -1,28 +1,87 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [registerData, setRegisterData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login data:', loginData);
-    // Add login logic here
+    setError('');
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        onLogin(data.user, data.token);
+        setSuccess('Login successful! Redirecting...');
+        setTimeout(() => navigate('/'), 1500);
+      } else {
+        setError(data.message || 'Login failed');
+      }
+    } catch (error) {
+      setError('Server error. Please try again later.');
+      console.error('Login error:', error);
+    }
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    
     if (registerData.password !== registerData.confirmPassword) {
-      alert('Passwords do not match!');
+      setError('Passwords do not match!');
       return;
     }
-    console.log('Register data:', registerData);
-    // Add register logic here
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: registerData.name,
+          email: registerData.email,
+          password: registerData.password
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        onLogin(data.user, data.token);
+        setSuccess('Registration successful! Redirecting...');
+        setTimeout(() => navigate('/'), 1500);
+      } else {
+        setError(data.message || 'Registration failed');
+      }
+    } catch (error) {
+      setError('Server error. Please try again later.');
+      console.error('Registration error:', error);
+    }
   };
 
   return (
     <div className="min-h-screen w-screen pt-20 pb-24 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center gap-10 px-4">
+      {/* Error/Success Messages */}
+      {(error || success) && (
+        <div className={`fixed top-20 right-4 p-4 rounded-lg shadow-lg ${error ? 'bg-red-500' : 'bg-green-500'} text-white z-50`}>
+          {error || success}
+        </div>
+      )}
+
       {/* Login Form */}
       <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6 text-green-700">Login</h2>
