@@ -35,8 +35,15 @@ const Cart = ({ cart, updateQuantity, removeFromCart, getTotalPrice, isOpen, onC
                     </button>
                     <span className="px-4">{item.quantity}</span>
                     <button
-                      onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                      className="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded"
+                      onClick={() => {
+                        if (item.quantity < item.stock) {
+                          updateQuantity(item._id, item.quantity + 1);
+                        } else {
+                          alert(`Maximum stock available: ${item.stock}`);
+                        }
+                      }}
+                      className={`px-3 py-1 rounded ${item.quantity >= item.stock ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
+                      disabled={item.quantity >= item.stock}
                     >
                       +
                     </button>
@@ -47,6 +54,9 @@ const Cart = ({ cart, updateQuantity, removeFromCart, getTotalPrice, isOpen, onC
                       Remove
                     </button>
                   </div>
+                  {item.quantity >= item.stock && (
+                    <p className="text-xs text-red-600 mt-1">Max stock reached</p>
+                  )}
                 </div>
                 <div className="text-right">
                   <p className="font-bold text-lg">৳{item.price * item.quantity}</p>

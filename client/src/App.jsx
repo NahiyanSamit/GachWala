@@ -67,9 +67,14 @@ function App() {
       return;
     }
     setCart(prev =>
-      prev.map(item =>
-        item._id === productId ? { ...item, quantity } : item
-      )
+      prev.map(item => {
+        if (item._id === productId) {
+          // Ensure quantity doesn't exceed stock
+          const newQuantity = Math.min(quantity, item.stock);
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      })
     );
   };
 
