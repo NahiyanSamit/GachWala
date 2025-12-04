@@ -6,6 +6,7 @@ import Home from './pages/home';
 import User from './pages/user';
 import Login from './pages/login';
 import Shop from './pages/shop';
+import Checkout from './pages/Checkout';
 import Cart from './components/Cart';
 
 function App() {
@@ -82,6 +83,10 @@ function App() {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <Router>
       <Navbar 
@@ -100,6 +105,17 @@ function App() {
               cart={cart} 
               setCart={setCart}
               user={user}
+            />
+          } 
+        />
+        <Route 
+          path="/checkout" 
+          element={
+            <Checkout 
+              cart={cart} 
+              user={user}
+              getTotalPrice={getTotalPrice}
+              clearCart={clearCart}
             />
           } 
         />

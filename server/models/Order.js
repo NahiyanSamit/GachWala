@@ -16,9 +16,26 @@ const orderSchema = new mongoose.Schema({
     quantity: Number,
     image: String
   }],
+  subtotal: {
+    type: Number,
+    required: true
+  },
+  shippingFee: {
+    type: Number,
+    default: 0
+  },
+  deliveryFee: {
+    type: Number,
+    default: 0
+  },
   totalAmount: {
     type: Number,
     required: true
+  },
+  paymentMethod: {
+    type: String,
+    enum: ['cash_on_delivery', 'online_payment'],
+    default: 'cash_on_delivery'
   },
   status: {
     type: String,
@@ -26,6 +43,9 @@ const orderSchema = new mongoose.Schema({
     default: 'pending'
   },
   shippingAddress: {
+    name: String,
+    phone: String,
+    email: String,
     street: String,
     city: String,
     state: String,

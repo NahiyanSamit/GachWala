@@ -1,7 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = ({ cart, updateQuantity, removeFromCart, getTotalPrice, isOpen, onClose }) => {
+  const navigate = useNavigate();
+  
   if (!isOpen) return null;
+
+  const handleCheckout = () => {
+    onClose();
+    navigate('/checkout');
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -72,7 +80,10 @@ const Cart = ({ cart, updateQuantity, removeFromCart, getTotalPrice, isOpen, onC
               <span className="text-xl font-bold">Total:</span>
               <span className="text-2xl font-bold text-green-700">৳{getTotalPrice()}</span>
             </div>
-            <button className="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-3 rounded-lg">
+            <button 
+              onClick={handleCheckout}
+              className="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-3 rounded-lg"
+            >
               Proceed to Checkout
             </button>
           </div>
