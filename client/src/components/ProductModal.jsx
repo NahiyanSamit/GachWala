@@ -28,7 +28,6 @@ const ProductModal = ({ product, isOpen, onClose, onAddToCart, user }) => {
 
   const handleAddToCart = () => {
     onAddToCart(product, quantity);
-    alert(`Added ${quantity} ${product.name} to cart!`);
   };
 
   return (

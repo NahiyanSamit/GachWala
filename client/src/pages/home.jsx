@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ProductModal from '../components/ProductModal';
 
-const Home = () => {
+const Home = ({ setCart, user }) => {
   const [newArrivals, setNewArrivals] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Fetch latest products (new arrivals)
@@ -20,6 +23,30 @@ const Home = () => {
         setLoading(false);
       });
   }, []);
+
+  const addToCart = (product, quantity = 1) => {
+    setCart(prev => {
+      const existingItem = prev.find(item => item._id === product._id);
+      if (existingItem) {
+        return prev.map(item =>
+          item._id === product._id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity }];
+    });
+  };
+
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const closeProductModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
 
   return (
     <div className="w-full">
@@ -58,7 +85,8 @@ const Home = () => {
                 {newArrivals.map(product => (
                   <div 
                     key={product._id}
-                    className="bg-white bg-opacity-95 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:bg-opacity-100 relative group"
+                    onClick={() => openProductModal(product)}
+                    className="bg-white bg-opacity-95 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:bg-opacity-100 relative group cursor-pointer"
                   >
                     <img 
                       src={product.image} 
@@ -87,6 +115,15 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Product Modal */}
+      <ProductModal
+        product={selectedProduct}
+        isOpen={isModalOpen}
+        onClose={closeProductModal}
+        onAddToCart={addToCart}
+        user={user}
+      />
     </div>
   );
 };

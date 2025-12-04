@@ -95,7 +95,7 @@ function App() {
         user={user}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home setCart={setCart} user={user} />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/user" element={<User user={user} onLogout={handleLogout} />} />
         <Route 
