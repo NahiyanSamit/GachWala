@@ -8,11 +8,14 @@ import Login from './pages/login';
 import Shop from './pages/shop';
 import Checkout from './pages/Checkout';
 import Cart from './components/Cart';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
 
   const verifyToken = useCallback(async (token) => {
     try {
@@ -41,6 +44,16 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('token');
+  };
+
+  const handleAdminLogin = (adminData, token) => {
+    setAdmin(adminData);
+    localStorage.setItem('adminToken', token);
+  };
+
+  const handleAdminLogout = () => {
+    setAdmin(null);
+    localStorage.removeItem('adminToken');
   };
 
   // Check for existing token on mount
@@ -119,6 +132,8 @@ function App() {
             />
           } 
         />
+        <Route path="/admin/login" element={<AdminLogin onLogin={handleAdminLogin} />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard admin={admin} onLogout={handleAdminLogout} />} />
       </Routes>
       <Footer />
       

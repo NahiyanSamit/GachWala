@@ -22,6 +22,10 @@ const productSchema = new mongoose.Schema({
   rating: {
     type: Number,
     default: 0
+  },
+  sale: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true
