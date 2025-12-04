@@ -52,7 +52,7 @@ const Home = ({ setCart, user }) => {
     <div className="w-full">
       {/* Hero Section with Background */}
       <div
-        className="min-h-screen w-full bg-cover bg-center relative pt-20 pb-24"
+        className="min-h-screen w-full bg-cover bg-center relative pt-12 pb-24"
         style={{ backgroundImage: "url('https://images.unsplash.com/photo-1470058869958-2a77ade41c02?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>

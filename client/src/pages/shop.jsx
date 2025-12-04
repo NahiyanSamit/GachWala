@@ -137,7 +137,7 @@ const Shop = ({ setCart, user }) => {
 
       <Link
         to="/"
-        className="fixed left-4 bottom-20 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg"
+        className="fixed left-4 bottom-24 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg"
       >
         Back to Home
       </Link>
