@@ -102,49 +102,58 @@ function App() {
 
   return (
     <Router>
-      <Navbar 
-        cartCount={getTotalItems()} 
-        onCartClick={() => setIsCartOpen(true)}
-        user={user}
-      />
       <Routes>
-        <Route path="/" element={<Home setCart={setCart} user={user} />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/user" element={<User user={user} onLogout={handleLogout} />} />
-        <Route 
-          path="/shop" 
-          element={
-            <Shop 
-              cart={cart} 
-              setCart={setCart}
-              user={user}
-            />
-          } 
-        />
-        <Route 
-          path="/checkout" 
-          element={
-            <Checkout 
-              cart={cart} 
-              user={user}
-              getTotalPrice={getTotalPrice}
-              clearCart={clearCart}
-            />
-          } 
-        />
+        {/* Admin Routes - No Navbar/Footer */}
         <Route path="/admin/login" element={<AdminLogin onLogin={handleAdminLogin} />} />
         <Route path="/admin/dashboard" element={<AdminDashboard admin={admin} onLogout={handleAdminLogout} />} />
+        
+        {/* Main Routes - With Navbar/Footer */}
+        <Route path="*" element={
+          <>
+            <Navbar 
+              cartCount={getTotalItems()} 
+              onCartClick={() => setIsCartOpen(true)}
+              user={user}
+            />
+            <Routes>
+              <Route path="/" element={<Home setCart={setCart} user={user} />} />
+              <Route path="/login" element={<Login onLogin={handleLogin} />} />
+              <Route path="/user" element={<User user={user} onLogout={handleLogout} />} />
+              <Route 
+                path="/shop" 
+                element={
+                  <Shop 
+                    cart={cart} 
+                    setCart={setCart}
+                    user={user}
+                  />
+                } 
+              />
+              <Route 
+                path="/checkout" 
+                element={
+                  <Checkout 
+                    cart={cart} 
+                    user={user}
+                    getTotalPrice={getTotalPrice}
+                    clearCart={clearCart}
+                  />
+                } 
+              />
+            </Routes>
+            <Footer />
+            
+            <Cart
+              cart={cart}
+              updateQuantity={updateQuantity}
+              removeFromCart={removeFromCart}
+              getTotalPrice={getTotalPrice}
+              isOpen={isCartOpen}
+              onClose={() => setIsCartOpen(false)}
+            />
+          </>
+        } />
       </Routes>
-      <Footer />
-      
-      <Cart
-        cart={cart}
-        updateQuantity={updateQuantity}
-        removeFromCart={removeFromCart}
-        getTotalPrice={getTotalPrice}
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-      />
     </Router>
   );
 }
